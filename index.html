@@ -137,7 +137,7 @@
             },
             {
                 speciesName: "Roháč obecný",
-                description: "Jeden z největších brouků v Evropě. Samečci mají nápadně velká, rohatá kusadla, která připomínají paroží.",
+                description: "Jeden z největších brouků v Evropě. Samečci mají nápadně velká rohatá kusadla, která připomínají paroží.",
                 class: "Hmyz (Insecta)",
                 order: "Brouci (Coleoptera)"
             },
@@ -241,12 +241,12 @@
                 loadRound1();
             } else if (currentRound === 2) {
                 speciesNameEl.textContent = organism.speciesName;
-                speciesDescriptionEl.textContent = organism.description;
+                speciesDescriptionEl.textContent = ""; // Popis odebrán
                 roundTitle.textContent = "Kolo 2: Přiřaď třídu";
                 loadRound2();
             } else if (currentRound === 3) {
                 speciesNameEl.textContent = organism.speciesName;
-                speciesDescriptionEl.textContent = organism.description;
+                speciesDescriptionEl.textContent = ""; // Popis odebrán
                 roundTitle.textContent = "Kolo 3: Přiřaď řád";
                 loadRound3();
             } else if (currentRound === 4) {
