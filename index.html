@@ -232,6 +232,10 @@
         let round3Organisms = [];
         let round4Organisms = [];
         let isTransitioning = false;
+        
+        // Pomocná data pro kolo 1
+        const allAnimals = organisms.filter(o => o.group === 'animal');
+        const allPlantsAndFungi = organisms.filter(o => o.group !== 'animal');
 
         // Elementy UI
         const startScreen = document.getElementById('start-screen');
@@ -380,9 +384,15 @@
             speciesDescriptionEl.textContent = organism.description;
 
             const correctName = organism.speciesName;
-            const allOtherOrganisms = organisms.filter(o => o.speciesName !== correctName);
-            const shuffledOthers = allOtherOrganisms.sort(() => Math.random() - 0.5);
-            const incorrectNames = shuffledOthers.slice(0, 3).map(o => o.speciesName);
+            let otherOrganisms;
+            if (organism.group === 'animal') {
+                otherOrganisms = allAnimals.filter(o => o.speciesName !== correctName);
+            } else {
+                otherOrganisms = allPlantsAndFungi.filter(o => o.speciesName !== correctName);
+            }
+
+            const shuffledOthers = otherOrganisms.sort(() => Math.random() - 0.5);
+            const incorrectNames = shuffledOthers.slice(0, 5).map(o => o.speciesName);
 
             const possibleAnswers = [correctName, ...incorrectNames];
             const shuffledAnswers = possibleAnswers.sort(() => Math.random() - 0.5);
@@ -535,50 +545,21 @@
         // Kontrola odpovědi - Kolo 4
         function checkAnswerRound4(organism) {
             const userInput = document.getElementById('species-input').value.trim();
-            let gainedScore = 0;
-            let feedbackText = "";
-            let isFullScore = false;
             
             const normalizedUserInput = userInput.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            const correctNormalizedName = organism.speciesName.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
-            // Kontrola pro čeleď Bukovité s více správnými odpověďmi
-            if (organism.family === "Bukovité (Fagaceae)") {
-                const normalizedCorrectNames = ["dub letni", "buk lesni"];
-                if (normalizedCorrectNames.includes(normalizedUserInput)) {
-                    gainedScore = 1;
-                    isFullScore = true;
-                    feedbackText = `Skvěle! Správně jsi napsal/a jeden ze správných názvů (${organism.speciesName} / Buk lesní). Získáváš 1 bod.`;
-                } else {
-                    gainedScore = 0;
-                    feedbackText = `Bohužel, tvá odpověď není správná. Správné názvy jsou: Dub letní nebo Buk lesní.`;
-                }
+            const isCorrect = normalizedUserInput === correctNormalizedName;
+
+            if (isCorrect) {
+                score += 1;
+                feedbackMessage.textContent = `Skvěle! Správně jsi napsal/a ${organism.speciesName}. Získáváš 1 bod.`;
+                feedbackMessage.className = "message-box correct text-center p-4 mt-6 rounded-lg text-lg font-semibold";
             } else {
-                // Původní logika pro ostatní organismy
-                const correctNormalizedName = organism.speciesName.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-
-                if (normalizedUserInput === correctNormalizedName) {
-                    gainedScore = 1;
-                    isFullScore = true;
-                    feedbackText = `Skvěle! Správně jsi napsal/a ${organism.speciesName}. Získáváš 1 bod.`;
-                } else {
-                    const correctWords = correctNormalizedName.split(' ');
-                    const userWords = normalizedUserInput.split(' ');
-                    const hasPartialMatch = userWords.some(word => correctWords.includes(word));
-
-                    if (hasPartialMatch) {
-                        gainedScore = 0.5;
-                        feedbackText = `Částečně správně. Získáváš 0,5 bodu. Správný název je: ${organism.speciesName}.`;
-                    } else {
-                        gainedScore = 0;
-                        feedbackText = `Bohužel, tvá odpověď není správná. Správný název je: ${organism.speciesName}.`;
-                    }
-                }
+                feedbackMessage.textContent = `Bohužel, tvá odpověď není správná. Správný název je: ${organism.speciesName}.`;
+                feedbackMessage.className = "message-box incorrect text-center p-4 mt-6 rounded-lg text-lg font-semibold";
             }
             
-            score += gainedScore;
-
-            feedbackMessage.textContent = feedbackText;
-            feedbackMessage.className = isFullScore ? "message-box correct text-center p-4 mt-6 rounded-lg text-lg font-semibold" : "message-box incorrect text-center p-4 mt-6 rounded-lg text-lg font-semibold";
             feedbackMessage.classList.remove('hidden');
             nextButton.classList.remove('hidden');
         }
