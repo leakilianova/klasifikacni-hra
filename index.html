@@ -373,7 +373,7 @@
                 loadRound3(organism);
             } else if (currentRound === 4) {
                 organism = round4Organisms[currentQuestionIndex];
-                roundTitle.textContent = `Kolo 4: Pojmenuj organismus (${currentQuestionIndex + 1}/${round4Organisms.length})`;
+                roundTitle.textContent = `Kolo 4: Pojmenuj organismus (z představených organismů ve hře) (${currentQuestionIndex + 1}/${round4Organisms.length})`;
                 loadRound4(organism);
             }
         }
@@ -481,7 +481,7 @@
             });
         }
 
-        // Kolo 4: Napiš název organismu (z ve hře představených organismů)
+        // Kolo 4: Napiš název organismu
         function loadRound4(organism) {
             speciesNameEl.textContent = `Třída: ${organism.class.split(' (')[0]}`;
             speciesDescriptionEl.textContent = `${organism.group === 'animal' ? 'Řád' : 'Čeleď'}: ${organism.group === 'animal' ? organism.order.split(' (')[0] : organism.family.split(' (')[0]}`;
