@@ -481,7 +481,7 @@
             });
         }
 
-        // Kolo 4: Napiš název organismu
+        // Kolo 4: Napiš název organismu (z ve hře představených organismů)
         function loadRound4(organism) {
             speciesNameEl.textContent = `Třída: ${organism.class.split(' (')[0]}`;
             speciesDescriptionEl.textContent = `${organism.group === 'animal' ? 'Řád' : 'Čeleď'}: ${organism.group === 'animal' ? organism.order.split(' (')[0] : organism.family.split(' (')[0]}`;
