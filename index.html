@@ -486,6 +486,12 @@
             speciesNameEl.textContent = `Třída: ${organism.class.split(' (')[0]}`;
             speciesDescriptionEl.textContent = `${organism.group === 'animal' ? 'Řád' : 'Čeleď'}: ${organism.group === 'animal' ? organism.order.split(' (')[0] : organism.family.split(' (')[0]}`;
             
+            // Přidání popisu organismu do 4. kola
+            const descriptionParagraph = document.createElement('p');
+            descriptionParagraph.textContent = organism.description;
+            descriptionParagraph.className = "text-gray-600 italic mb-4";
+            questionArea.appendChild(descriptionParagraph);
+
             const inputGroup = document.createElement('div');
             inputGroup.className = "flex flex-col sm:flex-row gap-4";
             
