@@ -52,7 +52,7 @@
         <!-- Úvodní obrazovka -->
         <div id="start-screen" class="card text-center transition-opacity duration-500">
             <h1 class="text-3xl sm:text-4xl font-bold mb-4">Klasifikační hra</h1>
-            <p class="mb-6 text-gray-600">Otestuj si své znalosti klasifikace organismů. Tato hra má 4 kola, ve kterých budeš spojovat organismy s jejich třídou a řádem a nakonec je i psát.</p>
+            <p class="mb-6 text-gray-600">Otestuj si své znalosti klasifikace organismů. Hra má 4 kola, ve kterých budeš zařazovat živočichy, rostliny a houby do správných skupin, řádů a čeledí a nakonec je i pojmenovat.</p>
             <button onclick="startGame()" class="button bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-full text-lg">
                 Spustit hru
             </button>
@@ -97,61 +97,120 @@
                 speciesName: "Liška obecná",
                 description: "Všežravá psovitá šelma s většinou rezavě hnědou srstí a hustým ocasem. Je jedním z nejrozšířenějších savců na světě.",
                 class: "Savci (Mammalia)",
-                order: "Šelmy (Carnivora)"
+                order: "Šelmy (Carnivora)",
+                group: "animal"
             },
             {
                 speciesName: "Kapr obecný",
                 description: "Sladkovodní ryba s šupinami a vousky kolem úst. Je hospodářsky významný a velmi rozšířený v rybnících.",
                 class: "Paprskoploutvé ryby (Actinopterygii)",
-                order: "Máloostní (Cypriniformes)"
+                order: "Máloostní (Cypriniformes)",
+                group: "animal"
             },
             {
                 speciesName: "Sýkora koňadra",
                 description: "Drobný pták s výrazným žlutým bříškem a svislým černým pruhem. Patří mezi nejběžnější ptáky v České republice.",
                 class: "Ptáci (Aves)",
-                order: "Pěvci (Passeriformes)"
+                order: "Pěvci (Passeriformes)",
+                group: "animal"
             },
             {
                 speciesName: "Užovka obojková",
                 description: "Mírně jedovatý had s charakteristickým žlutým nebo oranžovým obojkem za hlavou. Obývá vlhká místa a často plave.",
                 class: "Plazi (Reptilia)",
-                order: "Šupinatí (Squamata)"
+                order: "Šupinatí (Squamata)",
+                group: "animal"
             },
             {
                 speciesName: "Rosnička zelená",
                 description: "Drobná žába s jasně zelenou kůží a přísavkami na prstech. Je aktivní v noci a často ji lze slyšet, jak skřehotá.",
                 class: "Obojživelníci (Amphibia)",
-                order: "Žáby (Anura)"
+                order: "Žáby (Anura)",
+                group: "animal"
             },
             {
                 speciesName: "Veverka obecná",
                 description: "Malý hlodavec s dlouhým huňatým ocasem. Je známá sběrem a uskladňováním potravy, zejména ořechů a semen.",
                 class: "Savci (Mammalia)",
-                order: "Hlodavci (Rodentia)"
+                order: "Hlodavci (Rodentia)",
+                group: "animal"
             },
             {
                 speciesName: "Poštolka obecná",
                 description: "Malý denní dravec z čeledi sokolovitých. Je proslulá svým třepotavým letem na místě, kterým vyhledává kořist.",
                 class: "Ptáci (Aves)",
-                order: "Sokoli (Falconiformes)"
+                order: "Sokoli (Falconiformes)",
+                group: "animal"
             },
             {
                 speciesName: "Roháč obecný",
-                description: "Jeden z největších brouků v Evropě. Samečci mají nápadně velká rohatá kusadla, která připomínají paroží.",
+                description: "Jeden z největších brouků v Evropě. Samečci mají nápadně velká, rohatá kusadla, která připomínají paroží.",
                 class: "Hmyz (Insecta)",
-                order: "Brouci (Coleoptera)"
+                order: "Brouci (Coleoptera)",
+                group: "animal"
             },
             {
                 speciesName: "Mravenec lesní",
                 description: "Sociální hmyz žijící ve velkých koloniích, které staví vysoké mraveniště. Jsou důležití pro ekosystém lesa.",
                 class: "Hmyz (Insecta)",
-                order: "Blanokřídlí (Hymenoptera)"
+                order: "Blanokřídlí (Hymenoptera)",
+                group: "animal"
             },
             {
                 speciesName: "Ještěrka obecná",
                 description: "Malý plaz s tenkým tělem a dlouhým ocasem. V případě ohrožení ho dokáže odhodit a nechat dorůst.",
                 class: "Plazi (Reptilia)",
-                order: "Šupinatí (Squamata)"
+                order: "Šupinatí (Squamata)",
+                group: "animal"
+            },
+            {
+                speciesName: "Sněženka podsněžník",
+                description: "Jeden z prvních poslov jara s bílými, skloněnými květy.",
+                class: "Jednoděložné (Liliopsida)",
+                family: "Amarylkovité (Amaryllidaceae)",
+                group: "plant"
+            },
+            {
+                speciesName: "Pampeliška lékařská",
+                description: "Běžná rostlina s jasně žlutými květy, které se později mění na bílá chmýří.",
+                class: "Pravé dvouděložné (Eudicots)",
+                family: "Hvězdnicovité (Asteraceae)",
+                group: "plant"
+            },
+            {
+                speciesName: "Sasanka hajní",
+                description: "Bíle kvetoucí rostlina typická pro listnaté lesy, kvetoucí na jaře.",
+                class: "Pravé dvouděložné (Eudicots)",
+                family: "Pryskyřníkovité (Ranunculaceae)",
+                group: "plant"
+            },
+            {
+                speciesName: "Bříza bělokorá",
+                description: "Strom s charakteristickou bílou kůrou a jemnými větvičkami.",
+                class: "Pravé dvouděložné (Eudicots)",
+                family: "Břízovité (Betulaceae)",
+                group: "plant"
+            },
+            {
+                speciesName: "Dub letní",
+                description: "Mohutný listnatý strom, známý svými plody – žaludy. Roste velmi pomalu a dožívá se vysokého věku.",
+                class: "Pravé dvouděložné (Eudicots)",
+                family: "Bukovité (Fagaceae)",
+                group: "plant"
+            },
+            {
+                speciesName: "Hřib smrkový",
+                description: "Velmi ceněná jedlá houba s masivním, hnědým kloboukem.",
+                class: "Vlastní houby (Agaricomycetes)",
+                family: "Hřibovité (Boletaceae)",
+                group: "fungi"
+            },
+            {
+                speciesName: "Muchomůrka růžovka",
+                description: "Jedlá houba s růžovým zabarvením a charakteristickým prstenem na noze. Pozor, často je zaměňována s muchomůrkou tygrovanou!",
+                class: "Vlastní houby (Agaricomycetes)",
+                family: "Pečárkovité (Agaricaceae)",
+                group: "fungi"
             }
         ];
 
@@ -162,6 +221,8 @@
         let currentRound = 1;
         let currentQuestionIndex = 0;
         let score = 0;
+        let round2Organisms = [];
+        let round4Organisms = [];
 
         // Elementy UI
         const startScreen = document.getElementById('start-screen');
@@ -181,6 +242,7 @@
             gameScreen.classList.remove('hidden');
             gameScreen.classList.add('opacity-0');
             setTimeout(() => gameScreen.classList.remove('opacity-0'), 100);
+            
             resetGame();
             loadQuestion();
         }
@@ -191,7 +253,6 @@
             startScreen.classList.remove('hidden');
             startScreen.classList.add('opacity-0');
             setTimeout(() => startScreen.classList.remove('opacity-0'), 100);
-            // Resetuje pořadí organismů pro novou hru
             organisms.sort(() => Math.random() - 0.5);
         }
 
@@ -200,6 +261,10 @@
             currentRound = 1;
             currentQuestionIndex = 0;
             score = 0;
+            
+            const ophistokonta = organisms.filter(o => o.group === 'animal' || o.group === 'fungi');
+            round2Organisms = ophistokonta.sort(() => Math.random() - 0.5).slice(0, 7);
+            round4Organisms = organisms.filter(o => !round2Organisms.includes(o));
         }
 
         // Funkce pro načtení další otázky
@@ -209,15 +274,35 @@
             nextButton.classList.add('hidden');
             questionArea.innerHTML = '';
 
-            if (currentQuestionIndex >= organisms.length) {
+            if (currentRound === 1 && currentQuestionIndex >= organisms.length) {
                 currentQuestionIndex = 0;
-                currentRound++;
-                if (currentRound > 4) {
-                    showEndScreen();
-                    return;
-                }
+                currentRound = 2;
+            } else if (currentRound === 2 && currentQuestionIndex >= round2Organisms.length) {
+                showArchaeplastidaInfo();
+                return;
+            } else if (currentRound === 3 && currentQuestionIndex >= organisms.length) {
+                currentQuestionIndex = 0;
+                currentRound = 4;
+            } else if (currentRound === 4 && currentQuestionIndex >= round4Organisms.length) {
+                showEndScreen();
+                return;
             }
             loadQuestion();
+        }
+        
+        // Zobrazení přechodného textu
+        function showArchaeplastidaInfo() {
+            roundTitle.textContent = "Superskupina Archaeplastida";
+            speciesNameEl.textContent = "Rostliny";
+            speciesDescriptionEl.textContent = "Do této superskupiny patří rostliny, které se vyvinuly z řas, získaly chloroplasty a dokáží provádět fotosyntézu. Jejich buňky jsou zpevněné celulózní stěnou a patří sem organismy jako stromy, trávy a květiny.";
+            questionArea.innerHTML = '';
+            nextButton.classList.remove('hidden');
+            nextButton.textContent = "Pokračovat do dalšího kola";
+            nextButton.onclick = () => {
+                currentRound = 3;
+                currentQuestionIndex = 0;
+                loadQuestion();
+            };
         }
 
         // Funkce pro zobrazení závěrečné obrazovky
@@ -226,85 +311,87 @@
             endScreen.classList.remove('hidden');
             endScreen.classList.add('opacity-0');
             setTimeout(() => endScreen.classList.remove('opacity-0'), 100);
-            finalScoreEl.textContent = `Tvoje celkové skóre je ${score} z ${organisms.length * 4}.`;
+            finalScoreEl.textContent = `Tvoje celkové skóre je ${score} z ${organisms.length + round2Organisms.length + organisms.length + round4Organisms.length}.`;
         }
 
         // Funkce pro načtení otázky podle aktuálního kola
         function loadQuestion() {
-            const organism = organisms[currentQuestionIndex];
+            let organism;
             
             // Nastavení prvků UI pro každé kolo
             if (currentRound === 1) {
-                speciesNameEl.textContent = "";
-                speciesDescriptionEl.textContent = "";
-                roundTitle.textContent = "Kolo 1: Přiřaď popis k organismu";
-                loadRound1();
+                organism = organisms[currentQuestionIndex];
+                roundTitle.textContent = `Kolo 1: Představení organismů (${currentQuestionIndex + 1}/${organisms.length})`;
+                loadRound1(organism);
             } else if (currentRound === 2) {
-                speciesNameEl.textContent = organism.speciesName;
-                speciesDescriptionEl.textContent = ""; // Popis odebrán
-                roundTitle.textContent = "Kolo 2: Přiřaď třídu";
-                loadRound2();
+                organism = round2Organisms[currentQuestionIndex];
+                roundTitle.textContent = `Kolo 2: Zařaď Opisthokonta do tříd (${currentQuestionIndex + 1}/${round2Organisms.length})`;
+                loadRound2(organism);
             } else if (currentRound === 3) {
-                speciesNameEl.textContent = organism.speciesName;
-                speciesDescriptionEl.textContent = ""; // Popis odebrán
-                roundTitle.textContent = "Kolo 3: Přiřaď řád";
-                loadRound3();
+                organism = organisms[currentQuestionIndex];
+                roundTitle.textContent = `Kolo 3: Přiřaď řád/čeleď (${currentQuestionIndex + 1}/${organisms.length})`;
+                loadRound3(organism);
             } else if (currentRound === 4) {
-                speciesNameEl.textContent = "";
-                speciesDescriptionEl.textContent = "";
-                roundTitle.textContent = `Kolo 4: Napiš název organismu (z dnes představených) pro třídu ${organism.class.split(' (')[0]} a řád ${organism.order.split(' (')[0]}.`;
-                loadRound4();
+                organism = round4Organisms[currentQuestionIndex];
+                roundTitle.textContent = `Kolo 4: Pojmenuj organismus (${currentQuestionIndex + 1}/${round4Organisms.length})`;
+                loadRound4(organism);
             }
         }
         
-        // Kolo 1: Výběr správného organismu (původní kolo 3)
-        function loadRound1() {
-            const currentOrganism = organisms[currentQuestionIndex];
-            speciesNameEl.textContent = "Řád: " + currentOrganism.order.split(' (')[0];
-            speciesDescriptionEl.textContent = currentOrganism.description;
-
-            const allOrganisms = [...organisms];
-            allOrganisms.sort(() => Math.random() - 0.5);
-
-            allOrganisms.forEach(org => {
-                const button = document.createElement('button');
-                button.textContent = org.speciesName;
-                button.className = "button w-full bg-gray-200 hover:bg-gray-300 py-3 px-4 rounded-full font-semibold";
-                button.onclick = () => checkAnswerRound1(button, org.speciesName, currentOrganism.speciesName);
-                questionArea.appendChild(button);
-            });
+        // Kolo 1: Představení organismů
+        function loadRound1(organism) {
+            speciesNameEl.textContent = organism.speciesName;
+            speciesDescriptionEl.textContent = organism.description;
+            
+            questionArea.innerHTML = `
+                <div class="text-center">
+                    <p class="text-gray-700">Třída: ${organism.class.split(' (')[0]}</p>
+                    <p class="text-gray-700">${organism.group === 'animal' ? 'Řád' : 'Čeleď'}: ${organism.group === 'animal' ? organism.order.split(' (')[0] : organism.family.split(' (')[0]}</p>
+                </div>
+            `;
+            
+            nextButton.classList.remove('hidden');
         }
 
-        // Kolo 2: Výběr třídy (původní kolo 1)
-        function loadRound2() {
-            const classes = [...new Set(organisms.map(o => o.class))];
+        // Kolo 2: Zařazení do tříd (Opisthokonta)
+        function loadRound2(organism) {
+            speciesNameEl.textContent = organism.speciesName;
+            speciesDescriptionEl.textContent = "";
+            
+            const classes = [...new Set(round2Organisms.map(o => o.class))];
             classes.sort(() => Math.random() - 0.5);
 
             classes.forEach(cls => {
                 const button = document.createElement('button');
                 button.textContent = cls;
                 button.className = "button w-full bg-gray-200 hover:bg-gray-300 py-3 px-4 rounded-full font-semibold";
-                button.onclick = () => checkAnswerRound2(button, cls);
+                button.onclick = () => checkAnswerRound2(button, cls, organism.class);
                 questionArea.appendChild(button);
             });
         }
+        
+        // Kolo 3: Přiřaď řád/čeleď
+        function loadRound3(organism) {
+            speciesNameEl.textContent = organism.speciesName;
+            speciesDescriptionEl.textContent = "";
+            
+            const possibleAnswers = organisms.map(o => o.group === 'animal' ? o.order : o.family);
+            const shuffledAnswers = [...new Set(possibleAnswers)].sort(() => Math.random() - 0.5);
 
-        // Kolo 3: Výběr řádu (původní kolo 2)
-        function loadRound3() {
-            const orders = [...new Set(organisms.map(o => o.order))];
-            orders.sort(() => Math.random() - 0.5);
-
-            orders.forEach(ord => {
+            shuffledAnswers.forEach(ans => {
                 const button = document.createElement('button');
-                button.textContent = ord;
+                button.textContent = ans;
                 button.className = "button w-full bg-gray-200 hover:bg-gray-300 py-3 px-4 rounded-full font-semibold";
-                button.onclick = () => checkAnswerRound3(button, ord);
+                button.onclick = () => checkAnswerRound3(button, ans, organism);
                 questionArea.appendChild(button);
             });
         }
 
-        // Kolo 4: Napiš název organismu (původní kolo 4)
-        function loadRound4() {
+        // Kolo 4: Napiš název organismu
+        function loadRound4(organism) {
+            speciesNameEl.textContent = `Třída: ${organism.class.split(' (')[0]}`;
+            speciesDescriptionEl.textContent = `${organism.group === 'animal' ? 'Řád' : 'Čeleď'}: ${organism.group === 'animal' ? organism.order.split(' (')[0] : organism.family.split(' (')[0]}`;
+            
             const inputGroup = document.createElement('div');
             inputGroup.className = "flex flex-col sm:flex-row gap-4";
             
@@ -317,42 +404,23 @@
             const submitButton = document.createElement('button');
             submitButton.textContent = "Zkontrolovat";
             submitButton.className = "button bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-full";
-            submitButton.onclick = () => checkAnswerRound4();
+            submitButton.onclick = () => checkAnswerRound4(organism);
             
             inputGroup.appendChild(input);
             inputGroup.appendChild(submitButton);
             questionArea.appendChild(inputGroup);
         }
 
-        // Kontrola odpovědi - Kolo 1
-        function checkAnswerRound1(button, selectedName, correctName) {
-            const isCorrect = selectedName === correctName;
-            
-            if (isCorrect) {
-                score += 1;
-                feedbackMessage.textContent = "Správně! Získáváš 1 bod.";
-                feedbackMessage.className = "message-box correct text-center p-4 mt-6 rounded-lg text-lg font-semibold";
-            } else {
-                feedbackMessage.textContent = `Špatně. Správná odpověď je ${correctName}.`;
-                feedbackMessage.className = "message-box incorrect text-center p-4 mt-6 rounded-lg text-lg font-semibold";
-            }
-            
-            feedbackMessage.classList.remove('hidden');
-            nextButton.classList.remove('hidden');
-            disableButtons();
-        }
-
         // Kontrola odpovědi - Kolo 2
-        function checkAnswerRound2(button, selectedClass) {
-            const organism = organisms[currentQuestionIndex];
-            const isCorrect = selectedClass === organism.class;
+        function checkAnswerRound2(button, selectedClass, correctClass) {
+            const isCorrect = selectedClass === correctClass;
             
             if (isCorrect) {
                 score += 1;
                 feedbackMessage.textContent = "Správně! Získáváš 1 bod.";
                 feedbackMessage.className = "message-box correct text-center p-4 mt-6 rounded-lg text-lg font-semibold";
             } else {
-                feedbackMessage.textContent = `Špatně. Správná odpověď je ${organism.class}.`;
+                feedbackMessage.textContent = `Špatně. Správná odpověď je ${correctClass}.`;
                 feedbackMessage.className = "message-box incorrect text-center p-4 mt-6 rounded-lg text-lg font-semibold";
             }
             
@@ -362,16 +430,16 @@
         }
 
         // Kontrola odpovědi - Kolo 3
-        function checkAnswerRound3(button, selectedOrder) {
-            const organism = organisms[currentQuestionIndex];
-            const isCorrect = selectedOrder === organism.order;
+        function checkAnswerRound3(button, selectedAnswer, organism) {
+            const isCorrect = selectedAnswer === (organism.group === 'animal' ? organism.order : organism.family);
             
             if (isCorrect) {
                 score += 1;
                 feedbackMessage.textContent = "Správně! Získáváš 1 bod.";
                 feedbackMessage.className = "message-box correct text-center p-4 mt-6 rounded-lg text-lg font-semibold";
             } else {
-                feedbackMessage.textContent = `Špatně. Správná odpověď je ${organism.order}.`;
+                const correctAnswer = organism.group === 'animal' ? organism.order : organism.family;
+                feedbackMessage.textContent = `Špatně. Správná odpověď je ${correctAnswer}.`;
                 feedbackMessage.className = "message-box incorrect text-center p-4 mt-6 rounded-lg text-lg font-semibold";
             }
             
@@ -381,68 +449,33 @@
         }
 
         // Kontrola odpovědi - Kolo 4
-        function checkAnswerRound4() {
-            const organism = organisms[currentQuestionIndex];
+        function checkAnswerRound4(organism) {
             const userInput = document.getElementById('species-input').value.trim();
             let gainedScore = 0;
             let feedbackText = "";
             let isFullScore = false;
-
+            
             const normalizedUserInput = userInput.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            const correctNormalizedName = organism.speciesName.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
-            // Kontrola pro Plazy/Šupinaté
-            if (organism.class === "Plazi (Reptilia)" && organism.order === "Šupinatí (Squamata)") {
-                const correctNormalizedNames = ["uzovka obojkova", "jesterka obecna"];
-                
-                if (correctNormalizedNames.includes(normalizedUserInput)) {
-                    gainedScore = 1;
-                    isFullScore = true;
-                    feedbackText = `Skvěle! Správně jsi napsal/a jeden z možných názvů. Získáváš 1 bod.`;
-                } else {
-                    let hasPartialMatch = false;
-                    const correctWords1 = correctNormalizedNames[0].split(' ');
-                    const correctWords2 = correctNormalizedNames[1].split(' ');
-                    const userWords = normalizedUserInput.split(' ');
-
-                    for (let word of userWords) {
-                        if (correctWords1.includes(word) || correctWords2.includes(word)) {
-                            hasPartialMatch = true;
-                            break;
-                        }
-                    }
-
-                    if (hasPartialMatch) {
-                        gainedScore = 0.5;
-                        feedbackText = `Částečně správně. Získáváš 0,5 bodu. Správné názvy jsou: Užovka obojková nebo Ještěrka obecná.`;
-                    } else {
-                        gainedScore = 0;
-                        feedbackText = `Bohužel, tvá odpověď není správná. Správné názvy jsou: Užovka obojková nebo Ještěrka obecná.`;
-                    }
-                }
+            if (normalizedUserInput === correctNormalizedName) {
+                gainedScore = 1;
+                isFullScore = true;
+                feedbackText = `Skvěle! Správně jsi napsal/a ${organism.speciesName}. Získáváš 1 bod.`;
             } else {
-                // Původní logika pro ostatní organismy
-                const correctNormalizedName = organism.speciesName.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
                 const correctWords = correctNormalizedName.split(' ');
+                const userWords = normalizedUserInput.split(' ');
+                const hasPartialMatch = userWords.some(word => correctWords.includes(word));
 
-                if (normalizedUserInput === correctNormalizedName) {
-                    gainedScore = 1;
-                    isFullScore = true;
-                    feedbackText = `Skvěle! Správně jsi napsal/a rodový i druhový název. Získáváš 1 bod.`;
+                if (hasPartialMatch) {
+                    gainedScore = 0.5;
+                    feedbackText = `Částečně správně. Získáváš 0,5 bodu. Správný název je: ${organism.speciesName}.`;
                 } else {
-                    const userWords = normalizedUserInput.split(' ');
-                    const hasGenus = userWords.includes(correctWords[0]);
-                    const hasSpecies = correctWords.length > 1 ? userWords.includes(correctWords[1]) : false;
-
-                    if (hasGenus || hasSpecies) {
-                        gainedScore = 0.5;
-                        feedbackText = `Správně jsi napsal/a ${hasGenus ? "rodový" : "druhový"} název. Získáváš 0,5 bodu. Správný název je: ${organism.speciesName}.`;
-                    } else {
-                        gainedScore = 0;
-                        feedbackText = `Bohužel, tvá odpověď není správná. Správný název je: ${organism.speciesName}.`;
-                    }
+                    gainedScore = 0;
+                    feedbackText = `Bohužel, tvá odpověď není správná. Správný název je: ${organism.speciesName}.`;
                 }
             }
-            
+
             score += gainedScore;
 
             feedbackMessage.textContent = feedbackText;
