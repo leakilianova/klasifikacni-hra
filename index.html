@@ -199,6 +199,13 @@
                 group: "plant"
             },
             {
+                speciesName: "Buk lesní",
+                description: "Mohutný listnatý strom s hladkou, šedou kůrou. Je dominantní dřevinou v českých lesích a jeho plody jsou bukvice.",
+                class: "Pravé dvouděložné (Eudicots)",
+                family: "Bukovité (Fagaceae)",
+                group: "plant"
+            },
+            {
                 speciesName: "Hřib smrkový",
                 description: "Velmi ceněná jedlá houba s masivním, hnědým kloboukem.",
                 class: "Vlastní houby (Agaricomycetes)",
@@ -222,7 +229,9 @@
         let currentQuestionIndex = 0;
         let score = 0;
         let round2Organisms = [];
+        let round3Organisms = [];
         let round4Organisms = [];
+        let isTransitioning = false;
 
         // Elementy UI
         const startScreen = document.getElementById('start-screen');
@@ -261,26 +270,56 @@
             currentRound = 1;
             currentQuestionIndex = 0;
             score = 0;
+            isTransitioning = false;
             
+            // Nastavení organismů pro kolo 2
             const ophistokonta = organisms.filter(o => o.group === 'animal' || o.group === 'fungi');
             round2Organisms = ophistokonta.sort(() => Math.random() - 0.5).slice(0, 7);
-            round4Organisms = organisms.filter(o => !round2Organisms.includes(o));
+
+            // Nastavení organismů pro kolo 3
+            round3Organisms = [
+                organisms.find(o => o.speciesName === "Liška obecná"),
+                organisms.find(o => o.speciesName === "Kapr obecný"),
+                organisms.find(o => o.speciesName === "Sýkora koňadra"),
+                organisms.find(o => o.speciesName === "Užovka obojková"),
+                organisms.find(o => o.speciesName === "Rosnička zelená"),
+                organisms.find(o => o.speciesName === "Sněženka podsněžník"),
+                organisms.find(o => o.speciesName === "Pampeliška lékařská"),
+                organisms.find(o => o.speciesName === "Sasanka hajní"),
+                organisms.find(o => o.speciesName === "Bříza bělokorá"),
+                organisms.find(o => o.speciesName === "Hřib smrkový")
+            ];
+            round3Organisms.sort(() => Math.random() - 0.5);
+
+            // Nastavení organismů pro kolo 4
+            const usedOrganisms = [...round2Organisms, ...round3Organisms];
+            round4Organisms = organisms.filter(o => !usedOrganisms.includes(o));
+            round4Organisms.sort(() => Math.random() - 0.5);
         }
 
         // Funkce pro načtení další otázky
         function nextQuestion() {
-            currentQuestionIndex++;
             feedbackMessage.classList.add('hidden');
             nextButton.classList.add('hidden');
             questionArea.innerHTML = '';
 
+            if (isTransitioning) {
+                isTransitioning = false;
+                currentRound = 3;
+                currentQuestionIndex = 0;
+                loadQuestion();
+                return;
+            }
+
+            currentQuestionIndex++;
+            
             if (currentRound === 1 && currentQuestionIndex >= organisms.length) {
                 currentQuestionIndex = 0;
                 currentRound = 2;
             } else if (currentRound === 2 && currentQuestionIndex >= round2Organisms.length) {
                 showArchaeplastidaInfo();
                 return;
-            } else if (currentRound === 3 && currentQuestionIndex >= organisms.length) {
+            } else if (currentRound === 3 && currentQuestionIndex >= round3Organisms.length) {
                 currentQuestionIndex = 0;
                 currentRound = 4;
             } else if (currentRound === 4 && currentQuestionIndex >= round4Organisms.length) {
@@ -298,11 +337,7 @@
             questionArea.innerHTML = '';
             nextButton.classList.remove('hidden');
             nextButton.textContent = "Pokračovat do dalšího kola";
-            nextButton.onclick = () => {
-                currentRound = 3;
-                currentQuestionIndex = 0;
-                loadQuestion();
-            };
+            isTransitioning = true;
         }
 
         // Funkce pro zobrazení závěrečné obrazovky
@@ -311,7 +346,8 @@
             endScreen.classList.remove('hidden');
             endScreen.classList.add('opacity-0');
             setTimeout(() => endScreen.classList.remove('opacity-0'), 100);
-            finalScoreEl.textContent = `Tvoje celkové skóre je ${score} z ${organisms.length + round2Organisms.length + organisms.length + round4Organisms.length}.`;
+            const totalQuestions = organisms.length + round2Organisms.length + round3Organisms.length + round4Organisms.length;
+            finalScoreEl.textContent = `Tvoje celkové skóre je ${score} z ${totalQuestions}.`;
         }
 
         // Funkce pro načtení otázky podle aktuálního kola
@@ -321,15 +357,15 @@
             // Nastavení prvků UI pro každé kolo
             if (currentRound === 1) {
                 organism = organisms[currentQuestionIndex];
-                roundTitle.textContent = `Kolo 1: Představení organismů (${currentQuestionIndex + 1}/${organisms.length})`;
+                roundTitle.textContent = `Kolo 1: Vyber správný organismus (${currentQuestionIndex + 1}/${organisms.length})`;
                 loadRound1(organism);
             } else if (currentRound === 2) {
                 organism = round2Organisms[currentQuestionIndex];
                 roundTitle.textContent = `Kolo 2: Zařaď Opisthokonta do tříd (${currentQuestionIndex + 1}/${round2Organisms.length})`;
                 loadRound2(organism);
             } else if (currentRound === 3) {
-                organism = organisms[currentQuestionIndex];
-                roundTitle.textContent = `Kolo 3: Přiřaď řád/čeleď (${currentQuestionIndex + 1}/${organisms.length})`;
+                organism = round3Organisms[currentQuestionIndex];
+                roundTitle.textContent = `Kolo 3: Přiřaď řád/čeleď (${currentQuestionIndex + 1}/${round3Organisms.length})`;
                 loadRound3(organism);
             } else if (currentRound === 4) {
                 organism = round4Organisms[currentQuestionIndex];
@@ -338,19 +374,44 @@
             }
         }
         
-        // Kolo 1: Představení organismů
+        // Kolo 1: Vyber správný organismus
         function loadRound1(organism) {
-            speciesNameEl.textContent = organism.speciesName;
+            speciesNameEl.textContent = `${organism.group === 'animal' ? 'Řád' : 'Čeleď'}: ${organism.group === 'animal' ? organism.order.split(' (')[0] : organism.family.split(' (')[0]}`;
             speciesDescriptionEl.textContent = organism.description;
-            
-            questionArea.innerHTML = `
-                <div class="text-center">
-                    <p class="text-gray-700">Třída: ${organism.class.split(' (')[0]}</p>
-                    <p class="text-gray-700">${organism.group === 'animal' ? 'Řád' : 'Čeleď'}: ${organism.group === 'animal' ? organism.order.split(' (')[0] : organism.family.split(' (')[0]}</p>
-                </div>
-            `;
-            
+
+            const correctName = organism.speciesName;
+            const allOtherOrganisms = organisms.filter(o => o.speciesName !== correctName);
+            const shuffledOthers = allOtherOrganisms.sort(() => Math.random() - 0.5);
+            const incorrectNames = shuffledOthers.slice(0, 3).map(o => o.speciesName);
+
+            const possibleAnswers = [correctName, ...incorrectNames];
+            const shuffledAnswers = possibleAnswers.sort(() => Math.random() - 0.5);
+
+            questionArea.innerHTML = '';
+            shuffledAnswers.forEach(name => {
+                const button = document.createElement('button');
+                button.textContent = name;
+                button.className = "button w-full bg-gray-200 hover:bg-gray-300 py-3 px-4 rounded-full font-semibold";
+                button.onclick = () => checkAnswerRound1(button, name, correctName);
+                questionArea.appendChild(button);
+            });
+        }
+        
+        function checkAnswerRound1(button, selectedName, correctName) {
+            const isCorrect = selectedName === correctName;
+
+            if (isCorrect) {
+                score += 1;
+                feedbackMessage.textContent = "Správně! Získáváš 1 bod.";
+                feedbackMessage.className = "message-box correct text-center p-4 mt-6 rounded-lg text-lg font-semibold";
+            } else {
+                feedbackMessage.textContent = `Špatně. Správná odpověď je ${correctName}.`;
+                feedbackMessage.className = "message-box incorrect text-center p-4 mt-6 rounded-lg text-lg font-semibold";
+            }
+
+            feedbackMessage.classList.remove('hidden');
             nextButton.classList.remove('hidden');
+            disableButtons();
         }
 
         // Kolo 2: Zařazení do tříd (Opisthokonta)
@@ -358,10 +419,20 @@
             speciesNameEl.textContent = organism.speciesName;
             speciesDescriptionEl.textContent = "";
             
-            const classes = [...new Set(round2Organisms.map(o => o.class))];
-            classes.sort(() => Math.random() - 0.5);
+            // Pevně dané možnosti pro druhé kolo
+            const possibleClasses = [
+                "Hmyz (Insecta)",
+                "Paprskoploutvé ryby (Actinopterygii)",
+                "Ptáci (Aves)",
+                "Plazi (Reptilia)",
+                "Vlastní houby (Agaricomycetes)",
+                "Savci (Mammalia)",
+                "Obojživelníci (Amphibia)"
+            ];
 
-            classes.forEach(cls => {
+            const shuffledClasses = possibleClasses.sort(() => Math.random() - 0.5);
+
+            shuffledClasses.forEach(cls => {
                 const button = document.createElement('button');
                 button.textContent = cls;
                 button.className = "button w-full bg-gray-200 hover:bg-gray-300 py-3 px-4 rounded-full font-semibold";
@@ -375,8 +446,21 @@
             speciesNameEl.textContent = organism.speciesName;
             speciesDescriptionEl.textContent = "";
             
-            const possibleAnswers = organisms.map(o => o.group === 'animal' ? o.order : o.family);
-            const shuffledAnswers = [...new Set(possibleAnswers)].sort(() => Math.random() - 0.5);
+            // Pevně dané možnosti pro třetí kolo
+            const possibleAnswers = [
+                "Šelmy (Carnivora)",
+                "Máloostní (Cypriniformes)",
+                "Pěvci (Passeriformes)",
+                "Šupinatí (Squamata)",
+                "Žáby (Anura)",
+                "Amarylkovité (Amaryllidaceae)",
+                "Hvězdnicovité (Asteraceae)",
+                "Pryskyřníkovité (Ranunculaceae)",
+                "Břízovité (Betulaceae)",
+                "Hřibovité (Boletaceae)"
+            ];
+
+            const shuffledAnswers = possibleAnswers.sort(() => Math.random() - 0.5);
 
             shuffledAnswers.forEach(ans => {
                 const button = document.createElement('button');
@@ -456,26 +540,41 @@
             let isFullScore = false;
             
             const normalizedUserInput = userInput.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-            const correctNormalizedName = organism.speciesName.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
-            if (normalizedUserInput === correctNormalizedName) {
-                gainedScore = 1;
-                isFullScore = true;
-                feedbackText = `Skvěle! Správně jsi napsal/a ${organism.speciesName}. Získáváš 1 bod.`;
-            } else {
-                const correctWords = correctNormalizedName.split(' ');
-                const userWords = normalizedUserInput.split(' ');
-                const hasPartialMatch = userWords.some(word => correctWords.includes(word));
-
-                if (hasPartialMatch) {
-                    gainedScore = 0.5;
-                    feedbackText = `Částečně správně. Získáváš 0,5 bodu. Správný název je: ${organism.speciesName}.`;
+            // Kontrola pro čeleď Bukovité s více správnými odpověďmi
+            if (organism.family === "Bukovité (Fagaceae)") {
+                const normalizedCorrectNames = ["dub letni", "buk lesni"];
+                if (normalizedCorrectNames.includes(normalizedUserInput)) {
+                    gainedScore = 1;
+                    isFullScore = true;
+                    feedbackText = `Skvěle! Správně jsi napsal/a jeden ze správných názvů (${organism.speciesName} / Buk lesní). Získáváš 1 bod.`;
                 } else {
                     gainedScore = 0;
-                    feedbackText = `Bohužel, tvá odpověď není správná. Správný název je: ${organism.speciesName}.`;
+                    feedbackText = `Bohužel, tvá odpověď není správná. Správné názvy jsou: Dub letní nebo Buk lesní.`;
+                }
+            } else {
+                // Původní logika pro ostatní organismy
+                const correctNormalizedName = organism.speciesName.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
+                if (normalizedUserInput === correctNormalizedName) {
+                    gainedScore = 1;
+                    isFullScore = true;
+                    feedbackText = `Skvěle! Správně jsi napsal/a ${organism.speciesName}. Získáváš 1 bod.`;
+                } else {
+                    const correctWords = correctNormalizedName.split(' ');
+                    const userWords = normalizedUserInput.split(' ');
+                    const hasPartialMatch = userWords.some(word => correctWords.includes(word));
+
+                    if (hasPartialMatch) {
+                        gainedScore = 0.5;
+                        feedbackText = `Částečně správně. Získáváš 0,5 bodu. Správný název je: ${organism.speciesName}.`;
+                    } else {
+                        gainedScore = 0;
+                        feedbackText = `Bohužel, tvá odpověď není správná. Správný název je: ${organism.speciesName}.`;
+                    }
                 }
             }
-
+            
             score += gainedScore;
 
             feedbackMessage.textContent = feedbackText;
